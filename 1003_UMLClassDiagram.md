@@ -6,7 +6,7 @@
 
 ---
 
-### 🧩 UML Class Diagram (ภาษาอังกฤษ)
+### 🧩 UML Class Diagram
 
 ```mermaid
 classDiagram
