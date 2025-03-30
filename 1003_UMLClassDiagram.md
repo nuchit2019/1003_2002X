@@ -1,3 +1,13 @@
+### 🧩 Class
+- `ExportService` (ตัวหลักที่ประมวลผล)
+- `IBSTempInsGroupDataExpTemplateTO` (ตัวแทน Group Data)
+- `IBSHelperDBForDynamicStyleMsExcel` (ช่วยจัดการ Excel)
+- `HelperFile`, `HelperHttp`, `HelperZipFile` (ช่วยจัดการไฟล์, HTTP, ZIP)
+
+---
+
+### 🧩 UML Class Diagram (ภาษาอังกฤษ)
+
 ```mermaid
 classDiagram
     class ExportService {
@@ -49,3 +59,15 @@ classDiagram
     ExportService --> HelperHttp : send response
     ExportService --> HelperZipFile : zip files
 ```
+#
+
+### 🧠 Diagram นี้แสดงอะไร?
+
+| คลาส | บทบาท |
+|------|--------|
+| `ExportService` | Logic หลักของการ Export ไฟล์ |
+| `IBSTempInsGroupDataExpTemplateTO` | ตัวแทนข้อมูล Group สำหรับการสร้าง Sheet |
+| `IBSHelperDBForDynamicStyleMsExcel` | ตัวช่วยเขียน Excel จาก SQL |
+| `HelperFile` | จัดการไฟล์ชั่วคราว |
+| `HelperHttp` | ส่งไฟล์กลับ Client |
+| `HelperZipFile` | ZIP หลายไฟล์เป็น 1 ZIP |
