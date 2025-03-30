@@ -1,0 +1,56 @@
+```mermaid
+flowchart TD
+    %% Start
+    A[Start: export1003Process()] --> B[STEP 1: Logging เริ่มต้น]
+
+    %% Step 2: Define Paths
+    B --> C[STEP 2: กำหนด SQL Path และ Temp Folder]
+
+    %% Step 3: Init
+    C --> D[STEP 3: ประกาศตัวแปร Lists, Maps, Files]
+
+    %% Step 4: Insert Temp Data
+    D --> E[STEP 4: Insert ข้อมูลลง Temporary Table]
+
+    %% Step 5: Select Group File
+    E --> F[STEP 5: Select รายการ Group File ที่ต้อง Export]
+
+    %% Decision: มี Group File ไหม?
+    F --> G{STEP 6: Group File มีข้อมูล?}
+
+    G -- No --> Z1[Throw Exception: No Group File Found] --> Z[End]
+    
+    %% Step 6: วนลูป Group File
+    G -- Yes --> H[STEP 6.1: สร้าง Excel จาก Template]
+
+    H --> I[STEP 6.2: ดึง Group Data ตาม carGroup + carAge]
+
+    %% Decision: มี Group Data?
+    I --> J{Group Data มีข้อมูล?}
+    J -- No --> Z2[Throw Exception: GroupData is Null] --> Z
+
+    %% Step 6.3 - 7
+    J -- Yes --> K[STEP 6.3: สร้าง Sheet ตาม Group Data]
+    K --> L[STEP 7: เขียน Header & Detail ลง Excel (7 ส่วน)]
+
+    %% Step 8
+    L --> M[STEP 8: Add ไฟล์ Excel ลง ListFile, ListFileName]
+
+    %% วนลูปกลับ หากมี Group File ถัดไป
+    M --> G
+
+    %% Step 9
+    G --> N[STEP 9: สร้างไฟล์ ZIP จาก Excel ทั้งหมด]
+
+    %% Step 10
+    N --> O{STEP 10: ZIP File มีข้อมูล?}
+    O -- No --> Z3[Throw Exception: File is Empty] --> Z
+    O -- Yes --> P[ส่ง ZIP File กลับ Client ผ่าน HttpResponse]
+
+    %% Step 11
+    P --> Q[STEP 11: ลบไฟล์ Excel ชั่วคราวทั้งหมด]
+
+    %% Step 12
+    Q --> R[STEP 12: END Process]
+    R --> Z[End]
+```
